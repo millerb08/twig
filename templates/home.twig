@@ -21,27 +21,49 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+            {% for item in nav %}       
+            <li class="nav-item">
+                <a class="nav-link {{ item.status }}" href="{{ item["href"] }}">{{ item.caption }}
+                    {% if item.status == "active" %}
+                    <span class="sr-only">(current)</span>
+                    {% endif %}
+                </a>
+            </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/">Home
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
+            {% endfor %}
         </ul>
     </div>
 </nav>
 <main role="main" class="container">
 
     <div class="content">
-        Hello {{ name }}!
+        <h1>Hello <em>{% if name is not empty %}
+        {{- name|title -}}
+        {% else -%}
+        World
+        {%- endif %}!</em></h1>
 
-        {{"<em>"~name~"</em>"|title}}
+        {{ nav|keys|join(",") }}
+        {#
+        {{-"<em>"~name~"</em>"|title|raw-}}
         {% set namestr= '<em>'~name~'</em>'%}
-        {{namestr|title}}
-        {{"<em>world</em>"|title}}
-
-        {% filter upper %}
+        {{-namestr|title|raw-}}
+        {{-"<em>world</em>"|title|raw-}}
+        {{-"<em>world</em>"-}}
+        {% filter upper|raw -%}
         <em>world<em>
-        {% endfilter %}
+        {%- endfilter %}
+
+        {{"{{name}}"}}
+        {%verbatim%}
+        <h2>{{name}}</h2>
+        {% endverbatim %}
+        #}
     </div>
 
 </main><!-- /.container -->
