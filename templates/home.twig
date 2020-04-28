@@ -48,8 +48,15 @@
         World
         {%- endif %}!</em></h1>
 
-        {{ nav|keys|join(",") }}
+        {% if date() < date("2020-01-01") %}
+        {% set difference  = date().diff(date("2020-01-01")) %}
+        {{ difference.days }} days until 2020
+        {% else%}
+        I can see clearly now
+        {% endif %}
+  
         {#
+        {{ nav|keys|join(",") }}
         {{-"<em>"~name~"</em>"|title|raw-}}
         {% set namestr= '<em>'~name~'</em>'%}
         {{-namestr|title|raw-}}
@@ -68,7 +75,7 @@
 
 </main><!-- /.container -->
 <footer>
-    Copyright &copy; 2018 KK
+    Copyright &copy; {{ "now"|date("Y") }} KK
 </footer>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
