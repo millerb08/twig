@@ -1,9 +1,7 @@
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
-$loader = new \Twig\Loader\ArrayLoader([
-    'index' => 'Hello nuevo {{ name }}!',
-]);
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/../templates');
 $twig = new \Twig\Environment($loader);
 
-echo $twig->render('index', ['name' => 'Fabien']);
+echo $twig->render('home.twig', ['name' => 'miller']);
