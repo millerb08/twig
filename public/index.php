@@ -20,7 +20,7 @@ $nav = [
 
 if(substr($_SERVER["REQUEST_URI"], 0, 8) == "/contact" ){
     $nav["contact"]["status"] = "active";
-    echo $twig->render('contact.twig', ['name' => 'miller', "nav" => $nav]);
+    echo $twig->render('contact.twig', ['name' => 'miller', "nav" => $nav, "post" => $_POST]);
 }else{
     $nav["home"]["status"] = "active";
     echo $twig->render('home.twig', ['name' => 'miller', "nav" => $nav]);
