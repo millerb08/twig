@@ -9,7 +9,7 @@ $nav = [
     "home" =>[
         "href" => "/",
         "caption" => "Welcome",
-        "status" => "active"
+        "status" => false
     ],
     "contact" =>[
         "href" => "/contact",
@@ -17,4 +17,11 @@ $nav = [
         "status" => false
     ]
 ];
-echo $twig->render('home.twig', ['name' => 'miller', "nav" => $nav]);
+
+if(substr($_SERVER["REQUEST_URI"], 0, 8) == "/contact" ){
+    $nav["contact"]["status"] = "active";
+    echo $twig->render('contact.twig', ['name' => 'miller', "nav" => $nav]);
+}else{
+    $nav["home"]["status"] = "active";
+    echo $twig->render('home.twig', ['name' => 'miller', "nav" => $nav]);
+}
